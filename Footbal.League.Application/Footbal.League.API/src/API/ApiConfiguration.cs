@@ -12,6 +12,8 @@
     {
         public static IServiceCollection AddWebComponents(this IServiceCollection services)
         {
+            services.AddControllers();
+
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()?
                 .AddFluentValidationAutoValidation()

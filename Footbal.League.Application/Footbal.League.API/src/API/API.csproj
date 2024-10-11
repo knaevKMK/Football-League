@@ -15,4 +15,9 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Admin\ApiControllers\" />
+    <Folder Include="Features\Client\" />
+  </ItemGroup>
+
 </Project>
