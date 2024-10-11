@@ -1,24 +1,25 @@
 ﻿namespace Domain.BoundedContexts.FootballMatch.Entities
 {
 
-    using Domain.BoundedContexts.FootbalTeam.Exceptions;
+    using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Domain.Common.Models;
     using Domain.Common;
-    using Domain.BoundedContexts.FootballMatch.Exceptions; 
-    //  using Domain.BoundedContexts.FootbalTeam.Entities;
+    using Domain.BoundedContexts.FootballMatch.Exceptions;
+    using Domain.Common.Services;
+    using Domain.BoundedContexts.FootballTeam.Entities;
 
-    public class FootballMatchEntity : BaseDeletableEntity<Guid, InvalidFootbalTeamException>, IAggregateRoot
+    public class FootballMatchEntity : BaseDeletableEntity<Guid, InvalidFootballTeamException>, IAggregateRoot
     {
         #region Ctors
-        private FootballMatchEntity() { }
+        private FootballMatchEntity() : base() { }
 
         internal FootballMatchEntity(
               Guid createdFrom,
               Guid homeTeamId,
               byte homeGoals,
               Guid guestTeamId,
-              byte guestGoals
-              )
+              byte guestGoals,
+                IDateTimeProvider dateTimeProvider) : base(createdFrom, dateTimeProvider)
         {
             Validation(createdFrom, homeTeamId, homeGoals, guestTeamId, guestGoals);
             HomeTeamId = homeTeamId;
@@ -30,11 +31,11 @@
 
         #region Props
         public Guid HomeTeamId { get; private set; } = default!;
-        //   public FootbalTeamEntity HomeTeam { get; private set; } = default!;
+        public virtual FootballTeamEntity HomeTeam { get; private set; } = default!;
         public byte HomeGoals { get; private set; } = 0;
 
         public Guid GuestTeamId { get; private set; } = default!;
-        //   public FootbalTeamEntity GuestTeam { get; private set; } = default!;
+        public virtual FootballTeamEntity GuestTeam { get; private set; } = default!;
         public byte GuestGoals { get; private set; } = 0;
         #endregion
 
