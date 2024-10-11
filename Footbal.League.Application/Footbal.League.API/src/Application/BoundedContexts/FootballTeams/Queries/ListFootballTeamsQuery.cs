@@ -9,12 +9,12 @@
     {
         //Add pagination 
 
-        public class ListFootballTeamsHandler (IFootbalTeamsQueryRepository repository)
+        public class ListFootballTeamsHandler(IFootbalTeamsQueryRepository repository)
             : IRequestHandler<ListFootballTeamsQuery, Result<FootballTeamsListModel>>
         {
             public async Task<Result<FootballTeamsListModel>> Handle(ListFootballTeamsQuery request, CancellationToken cancellationToken)
             {
-                return await repository.ListTeamsAsync( cancellationToken);
+                return await repository.ListTeamsAsync(cancellationToken);
             }
         }
     }

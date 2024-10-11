@@ -6,5 +6,6 @@
     public interface IFootbalTeamsQueryRepository
     {
         Task<FootballTeamsListModel> ListTeamsAsync(CancellationToken cancellationToken);
+        Task<DetailFootbalTeamModel> DetailsTeamAsync(Guid teamId, CancellationToken cancellationToken);
     }
 }

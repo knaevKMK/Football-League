@@ -12,12 +12,20 @@
     {
 
         [HttpGet]
-        // Authorise to admin
-        public async Task<IActionResult> ListFootballTeams(CancellationToken cancellation)
+        public async Task<IActionResult> List(CancellationToken cancellation)
         {
             var teams = await _mediator.Send(new ListFootballTeamsQuery(), cancellation);
 
-            return Ok(teams);
+            return Ok(teams.Data);
+        }
+
+        [HttpGet]
+        [Route("{teamId}")]
+        public async Task<IActionResult> Details([FromRoute] Guid teamId, CancellationToken cancellation)
+        {
+            var teamDetails = await _mediator.Send(new DetailsFootballTeamQuery { TeamId = teamId }, cancellation);
+
+            return Ok(teamDetails.Data);
         }
 
     }
