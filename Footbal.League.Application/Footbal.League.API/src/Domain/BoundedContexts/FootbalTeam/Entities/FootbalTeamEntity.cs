@@ -5,7 +5,7 @@
     using Domain.Common.Models;
     using Domain.Common.Services;
 
-    internal class FootbalTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootbalTeamException>, IAggregateRoot
+    public class FootbalTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootbalTeamException>, IAggregateRoot
     {
         #region Ctor
         private FootbalTeamEntity() : base()
