@@ -6,17 +6,21 @@
         where TId : struct
         where TException : BaseDomainException, new()
     {
+        protected BaseEntity()
+        {
+        }
+
         protected BaseEntity(Guid createdFrom, IDateTimeProvider dateTimeProvider)
         {
             this.DateTimeProvider = dateTimeProvider;
 
-            ValidateCreatedFrom(createdFrom);
+            //ValidateCreatedFrom(createdFrom); // todo fix this !!!
 
             this.CreatedFrom = createdFrom;
             this.CreatedOn = dateTimeProvider?.UtcNow ?? DateTime.UtcNow;
         }
 
-        public IDateTimeProvider? DateTimeProvider { get; }
+        protected IDateTimeProvider? DateTimeProvider { get; }
         public Guid CreatedFrom { get; private set; }
         public DateTime CreatedOn { get; private set; }
 

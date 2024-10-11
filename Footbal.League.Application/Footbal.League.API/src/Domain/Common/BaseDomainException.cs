@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class BaseDomainException : Exception
+    public class BaseDomainException : Exception
     {
         private string? error;
 

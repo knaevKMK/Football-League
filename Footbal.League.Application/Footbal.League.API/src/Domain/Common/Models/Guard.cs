@@ -1,9 +1,21 @@
 ﻿namespace Domain.Common.Models
 {
+    using Domain.Common.Validation;
     using System;
 
     public static class Guard
     {
+        public static void ForValidGuid<TException>(string value, string name = "Value")
+            where TException : BaseDomainException, new()
+        {
+            if (Guid.TryParse(value, out _))
+            {
+                return;
+            }
+
+            ThrowException<TException>($"{name} is not valid Guid ID.");
+        }
+
         public static void AgainstEmptyString<TException>(string value, string name = "Value")
             where TException : BaseDomainException, new()
         {
@@ -53,7 +65,7 @@
         public static void ForValidUrl<TException>(string url, string name = "Value")
             where TException : BaseDomainException, new()
         {
-            if (url.Length <= ModelConstants.Common.MaxUrlLength && 
+            if (url.Length <= ModelConstants.Common.MaxUrlLength &&
                 Uri.IsWellFormedUriString(url, UriKind.Absolute))
             {
                 return;
@@ -71,6 +83,45 @@
             }
 
             ThrowException<TException>($"{name} must not be {unexpectedValue}.");
+        }
+
+        public static void ForValidEGN<TException>(string egn)
+            where TException : BaseDomainException, new()
+        {
+            var isEgnValid = ValidateEgn.IsValid(egn);
+
+            if (isEgnValid == true)
+            {
+                return;
+            }
+
+            ThrowException<TException>($"Egn {egn} is not valid!");
+        }
+
+        public static void ForValidEmail<TException>(string email)
+            where TException : BaseDomainException, new()
+        {
+            var isEmailValid = ValidateEmail.IsValid(email);
+
+            if (isEmailValid == true)
+            {
+                return;
+            }
+
+            ThrowException<TException>($"Email {email} is not valid!");
+        }
+
+        public static void ForValidPhoneNumber<TException>(string phoneNumber)
+            where TException : BaseDomainException, new()
+        {
+            var isPhoneNumberValid = ValidatePhone.IsValid(phoneNumber);
+
+            if (isPhoneNumberValid == true)
+            {
+                return;
+            }
+
+            ThrowException<TException>($"Phone number {phoneNumber} is not valid!");
         }
 
         private static void ThrowException<TException>(string message)
