@@ -5,7 +5,7 @@
     using Domain.Common.Models;
     using Domain.Common.Services;
 
-    internal class FootbalTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootbalException>, IAggregateRoot
+    internal class FootbalTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootbalTeamException>, IAggregateRoot
     {
         #region Ctor
         private FootbalTeamEntity() : base()
@@ -14,29 +14,20 @@
         }
 
         internal FootbalTeamEntity(
-                   Guid createdFrom,
-                   string name,
-                   IDateTimeProvider dateTimeProvider
-       ) : base(createdFrom, dateTimeProvider)
-        {
-            Validation(createdFrom, name);
-            Name = name;
-        }
-
-        internal FootbalTeamEntity(
                 Guid createdFrom,
                 string name,
-                string description,
+                string? description,
                 IDateTimeProvider dateTimeProvider
     ) : base(createdFrom, dateTimeProvider)
         {
+            Validation(createdFrom, name);
             Name = name;
             Description = description;
         }
         #endregion
 
         #region Props
-        public required string Name { get; internal set; }
+        public string Name { get; private set; } = default!;
         public string? Description { get; private set; }
         #endregion
 
@@ -51,12 +42,12 @@
         {
             if (createdFrom == Guid.Empty)
             {
-                throw new InvalidFootbalException("Created from is required.");
+                throw new InvalidFootbalTeamException("Created from is required.");
             }
         }
 
         private void ValidateContent(string? name, string propName)
-           => Guard.AgainstEmptyString<InvalidFootbalException>(name, propName);
+           => Guard.AgainstEmptyString<InvalidFootbalTeamException>(name ?? nameof(string.Empty), propName);
 
 
         public FootbalTeamEntity Update(Guid modifyFrom, string name, string? description)

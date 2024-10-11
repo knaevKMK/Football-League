@@ -3,13 +3,13 @@
 
     using Domain.Common;
 
-    public class InvalidFootbalException : BaseDomainException
+    public class InvalidFootbalTeamException : BaseDomainException
     {
-        public InvalidFootbalException()
+        public InvalidFootbalTeamException()
         {
         }
 
-        public InvalidFootbalException(string error)
+        public InvalidFootbalTeamException(string error)
         {
             this.Error = error;
         }
