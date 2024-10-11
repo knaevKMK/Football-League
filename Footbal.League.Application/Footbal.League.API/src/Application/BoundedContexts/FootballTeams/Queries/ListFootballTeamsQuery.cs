@@ -7,11 +7,14 @@
 
     public class ListFootballTeamsQuery : IRequest<Result<FootballTeamsListModel>>
     {
-        public class ListFootballTeamsHandler : IRequestHandler<ListFootballTeamsQuery, Result<FootballTeamsListModel>>
+        //Add pagination 
+
+        public class ListFootballTeamsHandler (IFootbalTeamsQueryRepository repository)
+            : IRequestHandler<ListFootballTeamsQuery, Result<FootballTeamsListModel>>
         {
-            public Task<Result<FootballTeamsListModel>> Handle(ListFootballTeamsQuery request, CancellationToken cancellationToken)
+            public async Task<Result<FootballTeamsListModel>> Handle(ListFootballTeamsQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                return await repository.ListTeamsAsync( cancellationToken);
             }
         }
     }
