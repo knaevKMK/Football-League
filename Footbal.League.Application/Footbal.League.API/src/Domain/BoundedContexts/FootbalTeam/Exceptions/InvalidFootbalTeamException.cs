@@ -1,15 +1,15 @@
-﻿namespace Domain.BoundedContexts.FootbalTeam.Exceptions
+﻿namespace Domain.BoundedContexts.FootballTeam.Exceptions
 {
 
     using Domain.Common;
 
-    public class InvalidFootbalTeamException : BaseDomainException
+    public class InvalidFootballTeamException : BaseDomainException
     {
-        public InvalidFootbalTeamException()
+        public InvalidFootballTeamException()
         {
         }
 
-        public InvalidFootbalTeamException(string error)
+        public InvalidFootballTeamException(string error)
         {
             this.Error = error;
         }

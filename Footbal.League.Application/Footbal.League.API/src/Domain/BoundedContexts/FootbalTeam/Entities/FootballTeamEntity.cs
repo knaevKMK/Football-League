@@ -1,19 +1,16 @@
-﻿namespace Domain.BoundedContexts.FootbalTeam.Entities
+﻿namespace Domain.BoundedContexts.FootballTeam.Entities
 {
-    using Domain.BoundedContexts.FootbalTeam.Exceptions;
+    using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Domain.Common;
     using Domain.Common.Models;
     using Domain.Common.Services;
 
-    public class FootbalTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootbalTeamException>, IAggregateRoot
+    public class FootballTeamEntity : BaseDeletableMutableEntity<Guid, InvalidFootballTeamException>, IAggregateRoot
     {
         #region Ctor
-        private FootbalTeamEntity() : base()
-        {
-            Name = string.Empty;
-        }
+        private FootballTeamEntity() : base() { }
 
-        internal FootbalTeamEntity(
+        internal FootballTeamEntity(
                 Guid createdFrom,
                 string name,
                 string? description,
@@ -42,15 +39,15 @@
         {
             if (createdFrom == Guid.Empty)
             {
-                throw new InvalidFootbalTeamException("Created from is required.");
+                throw new InvalidFootballTeamException("Created from is required.");
             }
         }
 
         private void ValidateContent(string? name, string propName)
-           => Guard.AgainstEmptyString<InvalidFootbalTeamException>(name ?? nameof(string.Empty), propName);
+           => Guard.AgainstEmptyString<InvalidFootballTeamException>(name ?? nameof(string.Empty), propName);
 
 
-        public FootbalTeamEntity Update(Guid modifyFrom, string name, string? description)
+        public FootballTeamEntity Update(Guid modifyFrom, string name, string? description)
         {
             this.UpdateModifiedFrom(modifyFrom);
             Name = name;

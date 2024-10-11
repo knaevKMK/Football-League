@@ -1,11 +1,12 @@
-﻿namespace Domain.BoundedContexts.FootbalTeam.Factories
+﻿namespace Domain.BoundedContexts.FootballTeam.Factories
 {
 
-    using Domain.BoundedContexts.FootbalTeam.Entities;
+    using Domain.BoundedContexts.FootballTeam.Entities;
+    using Domain.Common;
 
-    public interface IFootballTeamFactory
+    public interface IFootballTeamFactory: IFactory<FootballTeamEntity>
     {
-        FootbalTeamEntity Build();
+        FootballTeamEntity Build();
         IFootballTeamFactory WithCreatedFrom(Guid createdFrom);
         IFootballTeamFactory WithName(string name);
         IFootballTeamFactory WithDescription(string description);

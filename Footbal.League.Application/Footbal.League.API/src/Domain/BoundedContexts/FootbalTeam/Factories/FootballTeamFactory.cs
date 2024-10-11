@@ -1,7 +1,7 @@
-﻿namespace Domain.BoundedContexts.FootbalTeam.Factories
+﻿namespace Domain.BoundedContexts.FootballTeam.Factories
 {
-    using Domain.BoundedContexts.FootbalTeam.Entities;
-    using Domain.BoundedContexts.FootbalTeam.Exceptions;
+    using Domain.BoundedContexts.FootballTeam.Entities;
+    using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Domain.Common.Services;
 
     public class FootballTeamFactory(IDateTimeProvider dateTimeProvider): IFootballTeamFactory
@@ -18,19 +18,19 @@
         private bool descriptionIsSet = false;
         #endregion
 
-        public FootbalTeamEntity Build()
+        public FootballTeamEntity Build()
         {
             if (!createdFromSet)
             {
-                throw new InvalidFootbalTeamException($"{nameof(FootbalTeamEntity)}, {nameof(createdFromSet)} must have a value.");
+                throw new InvalidFootballTeamException($"{nameof(FootballTeamEntity)}, {nameof(createdFromSet)} must have a value.");
             }
             if (!nameIsSet)
             {
-                throw new InvalidFootbalTeamException($"{nameof(InvalidFootbalTeamException)}, {nameof(nameIsSet)} must have a value.");
+                throw new InvalidFootballTeamException($"{nameof(FootballTeamEntity)}, {nameof(nameIsSet)} must have a value.");
             }
 
 
-            return new FootbalTeamEntity(
+            return new FootballTeamEntity(
                 createdFrom,
                 name,
                 description,
