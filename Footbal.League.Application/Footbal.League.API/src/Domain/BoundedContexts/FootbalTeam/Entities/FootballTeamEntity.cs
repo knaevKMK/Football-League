@@ -1,5 +1,6 @@
 ﻿namespace Domain.BoundedContexts.FootballTeam.Entities
 {
+    using Domain.BoundedContexts.FootballMatch.Entities;
     using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Domain.Common;
     using Domain.Common.Models;
@@ -26,6 +27,9 @@
         #region Props
         public string Name { get; private set; } = default!;
         public string? Description { get; private set; }
+        public virtual ICollection<FootballMatchEntity> HomeMatches { get; private set; } = new List<FootballMatchEntity>();
+        public virtual ICollection<FootballMatchEntity> GuestMatches { get; private set; } = new List<FootballMatchEntity>();
+
         #endregion
 
         #region Validation
