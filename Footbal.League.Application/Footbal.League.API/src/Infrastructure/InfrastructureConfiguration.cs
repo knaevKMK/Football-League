@@ -8,6 +8,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Infrastructure.BoundedContexts.FootballTeam;
+    using Infrastructure.BoundedContexts.FootballMatch;
 
     public static class InfrastructureConfiguration
     {
@@ -23,12 +25,13 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                //.AddDbContext<AppDbContext>(options => options
-                //    .UseNpgsql(
-                //        configuration.GetConnectionString("DefaultConnection"),
-                //        sqlServer => sqlServer
-                //            .MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)))
-                //.AddScoped<IFootballDbContext>(provider => provider.GetService<AppDbContext>()!)
+                .AddDbContext<FootballAppDbContext>(options => options
+                    .UseNpgsql(
+                        configuration.GetConnectionString("DefaultConnection"),
+                        sqlServer => sqlServer
+                            .MigrationsAssembly(typeof(FootballAppDbContext).Assembly.FullName)))
+                .AddScoped<IFootballTeamDbContext>(provider => provider.GetService<FootballAppDbContext>()!)
+                .AddScoped<IFootballMatchDbContext>(provider => provider.GetService<FootballAppDbContext>()!)
                 .AddTransient<IInitializer, DatabaseInitializer>();
 
         internal static IServiceCollection AddRepositories(this IServiceCollection services)
