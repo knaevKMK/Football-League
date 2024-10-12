@@ -2,6 +2,8 @@
 {
     public interface ICurrentUser
     {
-        string UserId { get; }
+        void UpdateUserId(string userId);
+        string UserId();
+        Guid UserIdAsGuid();
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace API.Services
 {
+
     using System;
     using System.Security.Claims;
     using Application.Common.Contracts;
@@ -7,18 +8,25 @@
 
     public class CurrentUserService : ICurrentUser
     {
+        private string userId;
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
             var user = httpContextAccessor.HttpContext?.User;
 
+            this.userId = user?.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             if (user == null)
             {
-                throw new InvalidOperationException("This request does not have an authenticated user.");
+                // throw new UnauthorizedAccessException("This request does not have an authenticated user.");
             }
-
-            UserId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         }
 
-        public string UserId { get; }
+        public string UserId() => this.userId;
+
+        public Guid UserIdAsGuid() => Guid.Parse(userId);
+
+        public void UpdateUserId(string userId)
+        {
+            this.userId = userId;
+        }
     }
 }
