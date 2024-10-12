@@ -4,6 +4,7 @@
     using System.Net;
     using System.Threading.Tasks;
     using Application.Common.Exceptions;
+    using AutoMapper;
     using Domain.Common;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -51,7 +52,12 @@
                     break;
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
-                    break;
+                    break; 
+                case AutoMapperMappingException _:
+                case AutoMapperConfigurationException _:
+                    code = HttpStatusCode.UnprocessableEntity;
+                    result = SerializeObject(new[] { exception.Message });
+                    break; 
             }
 
             context.Response.ContentType = "application/json";

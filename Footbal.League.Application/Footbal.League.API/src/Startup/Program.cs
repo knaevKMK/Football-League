@@ -2,6 +2,7 @@ using static API.ApiConfiguration;
 using static Application.ApplicationConfiguration;
 using static Infrastructure.InfrastructureConfiguration;
 using static Domain.DomainConfiguration;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services
 
 
 var app = builder.Build();
+
+app.UseValidationExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
