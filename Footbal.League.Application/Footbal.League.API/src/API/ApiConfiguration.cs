@@ -14,6 +14,16 @@
         {
             services.AddControllers();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "My API",
+                    Version = "v1"
+                }); 
+            });
+
+
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()?
                 .AddFluentValidationAutoValidation()

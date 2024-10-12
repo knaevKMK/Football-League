@@ -7,7 +7,7 @@
     using Microsoft.Extensions.Logging;
     using Web.Controllers;
 
-    internal class TeamsController(ILogger<TeamsController> logger, IConfiguration configfuration)
+    public class TeamsController(ILogger<TeamsController> logger, IConfiguration configfuration)
         : BaseApiController<TeamsController>(logger, configfuration)
     {
 

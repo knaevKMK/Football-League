@@ -11,7 +11,6 @@ builder.Services
                 .AddApplication(builder.Configuration)
                 .AddWebComponents();
 
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -22,5 +21,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.MapControllers();
 
 app.Run();
