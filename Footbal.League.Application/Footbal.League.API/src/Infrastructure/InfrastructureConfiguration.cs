@@ -26,10 +26,10 @@
             IConfiguration configuration)
             => services
                 .AddDbContext<FootballAppDbContext>(options => options
-                    .UseNpgsql(
+                    .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
-                        sqlServer => sqlServer
-                            .MigrationsAssembly(typeof(FootballAppDbContext).Assembly.FullName)))
+                        sqlServer => sqlServer.MigrationsAssembly(typeof(FootballAppDbContext).Assembly.FullName)
+                 ))
                 .AddScoped<IFootballTeamDbContext>(provider => provider.GetService<FootballAppDbContext>()!)
                 .AddScoped<IFootballMatchDbContext>(provider => provider.GetService<FootballAppDbContext>()!)
                 .AddTransient<IInitializer, DatabaseInitializer>();
