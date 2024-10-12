@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_server
+    environment:
+      - SA_PASSWORD=YourStrong@Passw0rd
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    networks:
+      - my_network
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: footbal_league_api
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=footbal_league;User Id=sa;Password=YourStrong@Passw0rd;
+    ports:
+      - "5000:8080"  # Change this port if needed
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  mssql_data:

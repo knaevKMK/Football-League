@@ -16,12 +16,10 @@ builder.Services
 var app = builder.Build();
 
 app.UseValidationExceptionHandler();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League V1"));
-}
+ 
+ //todo hide swagger into Release
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League V1"));
 
 app.UseHttpsRedirection();
 app.UseRouting();
