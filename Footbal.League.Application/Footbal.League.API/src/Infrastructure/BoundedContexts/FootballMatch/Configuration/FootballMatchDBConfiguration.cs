@@ -26,7 +26,7 @@
               .HasOne(c => c.HomeTeam)
               .WithMany()
               .HasForeignKey(c => c.HomeTeamId)
-              .OnDelete(DeleteBehavior.Cascade); // related entity will soft delete only. In real project will set to Restrict || SetNull
+              .OnDelete(DeleteBehavior.NoAction); 
 
             builder
                 .Property(c => c.HomeGoals)
@@ -40,7 +40,7 @@
                 .HasOne(c => c.GuestTeam)
                 .WithMany()
                 .HasForeignKey(c => c.GuestTeamId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .Property(c => c.GuestGoals)

@@ -31,13 +31,13 @@
             .HasMany(c => c.HomeMatches)
             .WithOne(c => c.HomeTeam)
             .HasForeignKey(c => c.HomeTeamId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasMany(c => c.GuestMatches)
                 .WithOne(c => c.GuestTeam)
                 .HasForeignKey(c => c.GuestTeamId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
