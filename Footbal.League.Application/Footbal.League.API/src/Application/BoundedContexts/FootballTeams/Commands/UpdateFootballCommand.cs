@@ -3,8 +3,6 @@
 
     using Application.Common;
     using Application.Common.Contracts;
-    using Application.Common.Mapping;
-    using AutoMapper;
     using Domain.BoundedContexts.FootballTeam.Entities;
     using Domain.BoundedContexts.FootbalTeam.Repositories;
     using MediatR;
@@ -14,7 +12,7 @@
 
 
         #region Props 
-        public Guid TeamId { get; set; }
+        public Guid? TeamId { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         #endregion
@@ -26,7 +24,7 @@
         {
             public async Task<Result<bool>> Handle(UpdateFootballCommand request, CancellationToken cancellationToken)
             {
-                FootballTeamEntity entity = await teamRepository.FindTeamByIdAsync(request.TeamId, CancellationToken.None);
+                FootballTeamEntity entity = await teamRepository.FindTeamByIdAsync(request.TeamId!.Value, CancellationToken.None);
 
                 entity.Update(currentUser.UserIdAsGuid(), request.Name, request.Description);
 

@@ -22,7 +22,9 @@
 
         public string UserId() => this.userId;
 
-        public Guid UserIdAsGuid() => Guid.Parse(userId);
+        public Guid UserIdAsGuid() 
+            => Guid.NewGuid(); //rm after authorization impl
+            //=> Guid.Parse(userId);
 
         public void UpdateUserId(string userId)
         {

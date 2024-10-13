@@ -25,8 +25,7 @@
                 try
                 {
                     var teamEntity = teamFactory
-                         // .WithCreatedFrom(currentUser.UserIdAsGuid())  // Add authorization
-                          .WithCreatedFrom(Guid.NewGuid())
+                          .WithCreatedFrom(currentUser.UserIdAsGuid())  // Add authorization 
                           .WithName(request.Name)
                           .WithDescription(request.Description)
                           .Build();

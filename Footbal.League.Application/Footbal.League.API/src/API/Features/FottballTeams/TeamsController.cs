@@ -38,10 +38,11 @@
             return Ok(result.Data);
         }
 
-        [HttpPut]
+        [HttpPut("{teamId}")]
         //[Admin Authorization]
-        public async Task<IActionResult> Update([FromBody] UpdateFootballCommand request)
+        public async Task<IActionResult> Update([FromRoute]Guid teamId,[FromBody] UpdateFootballCommand request)
         {
+            request.TeamId = teamId;
             var result = await _mediator.Send(request);
 
             return Ok(result.Data);
