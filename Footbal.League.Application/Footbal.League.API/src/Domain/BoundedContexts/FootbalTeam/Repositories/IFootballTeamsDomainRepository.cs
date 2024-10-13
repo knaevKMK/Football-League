@@ -10,5 +10,6 @@
         Task<Guid> CreateTeamAsync(FootballTeamEntity entity);
         Task<FootballTeamEntity> FindTeamByIdAsync(Guid teamId, CancellationToken none);
         Task UpdataTeamAsync(FootballTeamEntity entity);
+        Task UpdateRankAsync(Guid matchId, Guid homeTeamId, byte homeTeamGoals, Guid guestTeamId, byte guestTeamGoals);
     }
 }

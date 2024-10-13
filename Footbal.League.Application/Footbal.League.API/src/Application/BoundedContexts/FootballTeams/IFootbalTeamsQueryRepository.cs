@@ -2,6 +2,7 @@
 {
 
     using Application.BoundedContexts.FootballTeams.Models.Response;
+    using Application.Common;
     using Application.Common.Contracts;
     using Domain.BoundedContexts.FootballTeam.Entities;
 
@@ -9,5 +10,6 @@
     {
         Task<FootballTeamsListModel> ListTeamsAsync(CancellationToken cancellationToken);
         Task<DetailFootbalTeamModel> DetailsTeamAsync(Guid teamId, CancellationToken cancellationToken);
+        Task<DetailTeamRankModel> GetTeamRankAsync(Guid teamId, CancellationToken cancellationToken);
     }
 }

@@ -5,6 +5,7 @@
     #region Usings
     using Domain.BoundedContexts.FootballMatch.Entities;
     using Domain.BoundedContexts.FootballTeam.Entities;
+    using Domain.BoundedContexts.FootbalTeam.Entities;
     using Domain.Common.Models;
     using Infrastructure.BoundedContexts.FootballMatch;
     using Infrastructure.BoundedContexts.FootballTeam;
@@ -36,6 +37,7 @@
         #region Entities
         public DbSet<FootballTeamEntity> FootballTeams { get; set; } = default!;
         public DbSet<FootballMatchEntity> FootballMatches { get; set; } = default!;
+        public DbSet<FootballRankingEntity> Ranks { get; set; } = default!;
         #endregion
 
         #region Overrides

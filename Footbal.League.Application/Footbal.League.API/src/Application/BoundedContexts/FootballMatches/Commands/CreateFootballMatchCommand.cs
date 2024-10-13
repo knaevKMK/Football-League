@@ -6,6 +6,7 @@
     using Domain.BoundedContexts.FootballMatch.Exceptions;
     using Domain.BoundedContexts.FootballMatch.Repositories;
     using Domain.BoundedContexts.FootballTeam.Factories;
+    using Domain.BoundedContexts.FootbalTeam.Repositories;
     using MediatR;
     using System.Threading;
     using System.Threading.Tasks;
@@ -22,7 +23,8 @@
         public class CreateFootballMatchHandler(
                                             ICurrentUser currentUser,
                                             IFootballMatchFactory matchFactory,
-                                            IFootballMatchesDomainRepository matchesRepository
+                                            IFootballMatchesDomainRepository matchesRepository,
+                                            IFootballTeamsDomainRepository footballTeamsDomainRepository
                                             )
             : IRequestHandler<CreateFootballMatchCommand, Result<Guid>>
         {
@@ -39,6 +41,8 @@
                                            .Build();
 
                     var matchId = await matchesRepository.CreateAsync(entity);
+
+                   await footballTeamsDomainRepository.UpdateRankAsync(matchId, request.HomeTeamId, request.HomeTeamGoals, request.GuestTeamId, request.GuestTeamGoals);
 
                     return matchId;
                 }

@@ -1,6 +1,7 @@
 ﻿namespace Infrastructure.BoundedContexts.FootballTeam.Configuration
 { 
     using Domain.BoundedContexts.FootballTeam.Entities;
+    using Domain.BoundedContexts.FootbalTeam.Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,7 +26,18 @@
 
             builder
               .Property(c => c.Description)
-              .HasMaxLength(500); 
+              .HasMaxLength(500);
+
+            builder
+             .Property(c => c.RankId)
+             .IsRequired();
+
+
+            builder
+            .HasOne(c => c.Rank)
+            .WithOne(c => c.Team)
+            .HasForeignKey<FootballRankingEntity>(r => r.TeamId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             builder
             .HasMany(c => c.HomeMatches)

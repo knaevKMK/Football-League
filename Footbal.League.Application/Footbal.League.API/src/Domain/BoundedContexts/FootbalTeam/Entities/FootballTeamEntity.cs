@@ -2,6 +2,7 @@
 {
     using Domain.BoundedContexts.FootballMatch.Entities;
     using Domain.BoundedContexts.FootballTeam.Exceptions;
+    using Domain.BoundedContexts.FootbalTeam.Entities;
     using Domain.Common;
     using Domain.Common.Models;
     using Domain.Common.Services;
@@ -21,12 +22,19 @@
             Validation(createdFrom, name);
             Name = name;
             Description = description;
+
+            Rank = new(this.Id, createdFrom, dateTimeProvider);
         }
         #endregion
 
         #region Props
         public string Name { get; private set; } = default!;
         public string? Description { get; private set; }
+
+        public Guid RankId { get; private set; } = default!;
+
+        public virtual FootballRankingEntity Rank { get; private set; }  
+
         public virtual ICollection<FootballMatchEntity> HomeMatches { get; private set; } = new List<FootballMatchEntity>();
         public virtual ICollection<FootballMatchEntity> GuestMatches { get; private set; } = new List<FootballMatchEntity>();
 
