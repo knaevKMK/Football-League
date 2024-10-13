@@ -11,12 +11,15 @@
     {
         public Guid TeamId { get; set; }
 
-        public class DetailsFootballTeamHandler(IFootbalTeamsQueryRepository repository)
+        public class DetailsFootballTeamHandler(
+            IFootbalTeamsQueryRepository repository)
             : IRequestHandler<DetailsFootballTeamQuery, Result<DetailFootbalTeamModel>>
         {
             public async Task<Result<DetailFootbalTeamModel>> Handle(DetailsFootballTeamQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var result = await repository.DetailsTeamAsync(request.TeamId, cancellationToken);
+
+                return result;
             }
         }
     }

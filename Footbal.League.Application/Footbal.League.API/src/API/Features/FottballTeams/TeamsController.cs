@@ -19,8 +19,7 @@
             return Ok(result.Data);
         }
 
-        [HttpGet]
-        [Route("{teamId}")]
+        [HttpGet("{teamId}")]
         public async Task<IActionResult> Details([FromRoute] Guid teamId, CancellationToken cancellation)
         {
             var result = await _mediator.Send(new DetailsFootballTeamQuery { TeamId = teamId }, cancellation);
@@ -40,7 +39,7 @@
 
         [HttpPut("{teamId}")]
         //[Admin Authorization]
-        public async Task<IActionResult> Update([FromRoute]Guid teamId,[FromBody] UpdateFootballTeamCommand request)
+        public async Task<IActionResult> Update([FromRoute] Guid teamId, [FromBody] UpdateFootballTeamCommand request)
         {
             request.TeamId = teamId;
             var result = await _mediator.Send(request, CancellationToken.None);
@@ -51,8 +50,17 @@
         [HttpDelete("{teamId}")]
         //[Admin Authorization]
         public async Task<IActionResult> Delete([FromRoute] Guid teamId)
-        { 
-            var result = await _mediator.Send(new DeleteFootballTeamCommand { TeamId= teamId}, CancellationToken.None);
+        {
+            var result = await _mediator.Send(new DeleteFootballTeamCommand { TeamId = teamId }, CancellationToken.None);
+
+            return Ok(result.Data);
+        }
+
+        [HttpDelete("{teamId}")]
+        //[Admin Authorization]
+        public async Task<IActionResult> Restore([FromRoute] Guid teamId)
+        {
+            var result = await _mediator.Send(new RestoreFootballTeamCommand { TeamId = teamId }, CancellationToken.None);
 
             return Ok(result.Data);
         }
