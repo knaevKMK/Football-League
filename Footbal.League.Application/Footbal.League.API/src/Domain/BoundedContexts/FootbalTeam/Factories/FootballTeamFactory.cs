@@ -51,7 +51,7 @@
             return this;
         }
 
-        public IFootballTeamFactory WithDescription(string description)
+        public IFootballTeamFactory WithDescription(string? description)
         {
             this.description = description;
             descriptionIsSet = true;  //not required

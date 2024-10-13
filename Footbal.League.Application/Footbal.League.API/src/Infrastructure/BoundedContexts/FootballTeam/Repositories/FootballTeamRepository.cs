@@ -10,10 +10,12 @@
     using Domain.BoundedContexts.FootballTeam.Entities;
     using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Infrastructure.Common.Persistence;
+    using Domain.BoundedContexts.FootbalTeam.Repositories;
     #endregion
 
     internal class FootballTeamRepository(IFootballTeamDbContext db, IMapper mapper) : DataRepository<IFootballTeamDbContext, FootballTeamEntity>(db)
         , IFootbalTeamsQueryRepository
+        , IFootballTeamsDomainRepository
     {
         public async Task<DetailFootbalTeamModel> DetailsTeamAsync(Guid teamId, CancellationToken cancellationToken)
         {
@@ -37,6 +39,13 @@
                                                //.Skip  prev preview items (pages * pageItems)
                                                .ToListAsync(cancellationToken)
             };
+        }
+
+        public async Task<Guid> CreateTeamAsync(FootballTeamEntity entity)
+        {
+            var entry = await Data.FootballTeams.AddAsync(entity);
+            await Data.SaveChangesAsync(CancellationToken.None);
+            return entry.Entity.Id;
         }
     }
 }

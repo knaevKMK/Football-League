@@ -1,6 +1,6 @@
 ﻿namespace API.Features.FottballTeams
 {
-
+    using Application.BoundedContexts.FootballTeams.Commands;
     using Application.BoundedContexts.FootballTeams.Queries;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -14,19 +14,28 @@
         [HttpGet]
         public async Task<IActionResult> List(CancellationToken cancellation)
         {
-            var teams = await _mediator.Send(new ListFootballTeamsQuery(), cancellation);
+            var result = await _mediator.Send(new ListFootballTeamsQuery(), cancellation);
 
-            return Ok(teams.Data);
+            return Ok(result.Data);
         }
 
         [HttpGet]
         [Route("{teamId}")]
         public async Task<IActionResult> Details([FromRoute] Guid teamId, CancellationToken cancellation)
         {
-            var teamDetails = await _mediator.Send(new DetailsFootballTeamQuery { TeamId = teamId }, cancellation);
+            var result = await _mediator.Send(new DetailsFootballTeamQuery { TeamId = teamId }, cancellation);
 
-            return Ok(teamDetails.Data);
+            return Ok(result.Data);
         }
 
+
+        [HttpPost]
+        //[Admin Authorization]
+        public async Task<IActionResult> Create([FromBody] CreateFootballCommand request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok(result.Data);
+        }
     }
 }
