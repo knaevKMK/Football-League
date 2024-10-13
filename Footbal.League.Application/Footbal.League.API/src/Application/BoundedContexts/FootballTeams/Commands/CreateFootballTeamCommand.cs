@@ -7,20 +7,20 @@
     using Domain.BoundedContexts.FootbalTeam.Repositories;
     using MediatR;
 
-    public class CreateFootballCommand : IRequest<Result<Guid>>
+    public class CreateFootballTeamCommand : IRequest<Result<Guid>>
     {
         public string Name { get; set; } = default!;
         public string? Description { get; set; }
 
 
-        public class CreateFootballHandler(
+        public class CreateFootballTeamHandler(
             ICurrentUser currentUser,
             IFootballTeamFactory teamFactory,
             IFootballTeamsDomainRepository teamsRepository
             )
-            : IRequestHandler<CreateFootballCommand, Result<Guid>>
+            : IRequestHandler<CreateFootballTeamCommand, Result<Guid>>
         {
-            public async Task<Result<Guid>> Handle(CreateFootballCommand request, CancellationToken cancellationToken)
+            public async Task<Result<Guid>> Handle(CreateFootballTeamCommand request, CancellationToken cancellationToken)
             {
                 try
                 {

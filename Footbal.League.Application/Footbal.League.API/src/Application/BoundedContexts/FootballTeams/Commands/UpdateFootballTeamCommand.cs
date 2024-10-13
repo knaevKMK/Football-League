@@ -7,7 +7,7 @@
     using Domain.BoundedContexts.FootbalTeam.Repositories;
     using MediatR;
 
-    public class UpdateFootballCommand : IRequest<Result<bool>>
+    public class UpdateFootballTeamCommand : IRequest<Result<bool>>
     {
 
 
@@ -20,9 +20,9 @@
         public class UpdateFootballHandler(
             ICurrentUser currentUser,
             IFootballTeamsDomainRepository teamRepository)
-            : IRequestHandler<UpdateFootballCommand, Result<bool>>
+            : IRequestHandler<UpdateFootballTeamCommand, Result<bool>>
         {
-            public async Task<Result<bool>> Handle(UpdateFootballCommand request, CancellationToken cancellationToken)
+            public async Task<Result<bool>> Handle(UpdateFootballTeamCommand request, CancellationToken cancellationToken)
             {
                 FootballTeamEntity entity = await teamRepository.FindTeamByIdAsync(request.TeamId!.Value, CancellationToken.None);
 

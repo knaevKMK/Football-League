@@ -31,19 +31,28 @@
 
         [HttpPost]
         //[Admin Authorization]
-        public async Task<IActionResult> Create([FromBody] CreateFootballCommand request)
+        public async Task<IActionResult> Create([FromBody] CreateFootballTeamCommand request)
         {
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(request, CancellationToken.None);
 
             return Ok(result.Data);
         }
 
         [HttpPut("{teamId}")]
         //[Admin Authorization]
-        public async Task<IActionResult> Update([FromRoute]Guid teamId,[FromBody] UpdateFootballCommand request)
+        public async Task<IActionResult> Update([FromRoute]Guid teamId,[FromBody] UpdateFootballTeamCommand request)
         {
             request.TeamId = teamId;
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(request, CancellationToken.None);
+
+            return Ok(result.Data);
+        }
+
+        [HttpDelete("{teamId}")]
+        //[Admin Authorization]
+        public async Task<IActionResult> Delete([FromRoute] Guid teamId)
+        { 
+            var result = await _mediator.Send(new DeleteFootballTeamCommand { TeamId= teamId}, CancellationToken.None);
 
             return Ok(result.Data);
         }
