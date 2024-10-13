@@ -1,4 +1,9 @@
 # Football-League
+## Run App with runApi.bat. You will need run docker engine before execute file.
+
+## Open http://localhost:5000/swagger/index.html
+
+## Stop App with stopApi.bat.
 
 # Migrations:
 ## create 
