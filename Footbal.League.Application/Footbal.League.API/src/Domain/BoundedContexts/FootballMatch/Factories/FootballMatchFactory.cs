@@ -77,13 +77,13 @@
         public IFootballMatchFactory WithGuestTeam(Guid guestTeamId)
         {
             this.guestTeamId = guestTeamId;
-            homeTeamIdIsSet = true;
+            guestTeamIdIsSet = true;
             return this;
         }
         public IFootballMatchFactory WithGuestTeamGoals(byte guestGoals)
         {
             this.guestGoals = guestGoals;
-            homeGoalsIsSet = true;
+            guestGoalsIsSet = true;
             return this;
         }
     }
