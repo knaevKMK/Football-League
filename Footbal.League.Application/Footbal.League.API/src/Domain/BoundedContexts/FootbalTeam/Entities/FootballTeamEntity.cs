@@ -51,10 +51,13 @@
            => Guard.AgainstEmptyString<InvalidFootballTeamException>(name ?? nameof(string.Empty), propName);
 
 
-        public FootballTeamEntity Update(Guid modifyFrom, string name, string? description)
+        public FootballTeamEntity Update(Guid modifyFrom, string? name, string? description)
         {
             this.UpdateModifiedFrom(modifyFrom);
-            Name = name;
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                this.Name = name;
+            }
             if (!string.IsNullOrWhiteSpace(description))
             {
                 this.Description = description;
@@ -62,5 +65,7 @@
             return this;
         }
         #endregion
+
+
     }
 }

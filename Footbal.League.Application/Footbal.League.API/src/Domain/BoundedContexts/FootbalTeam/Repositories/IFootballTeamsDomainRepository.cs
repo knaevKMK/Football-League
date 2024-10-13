@@ -3,9 +3,12 @@
 
     using Domain.BoundedContexts.FootballTeam.Entities;
     using Domain.Common;
+    using System.Threading;
 
     public interface IFootballTeamsDomainRepository : IDomainRepository<FootballTeamEntity>
     {
         Task<Guid> CreateTeamAsync(FootballTeamEntity entity);
+        Task<FootballTeamEntity> FindTeamByIdAsync(Guid teamId, CancellationToken none);
+        Task UpdataTeamAsync(FootballTeamEntity entity);
     }
 }

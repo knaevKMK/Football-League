@@ -37,5 +37,14 @@
 
             return Ok(result.Data);
         }
+
+        [HttpPut]
+        //[Admin Authorization]
+        public async Task<IActionResult> Update([FromBody] UpdateFootballCommand request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok(result.Data);
+        }
     }
 }

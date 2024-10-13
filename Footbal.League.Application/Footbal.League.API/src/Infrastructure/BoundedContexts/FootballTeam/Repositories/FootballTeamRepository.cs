@@ -11,6 +11,7 @@
     using Domain.BoundedContexts.FootballTeam.Exceptions;
     using Infrastructure.Common.Persistence;
     using Domain.BoundedContexts.FootbalTeam.Repositories;
+    using System.Threading;
     #endregion
 
     internal class FootballTeamRepository(IFootballTeamDbContext db, IMapper mapper) : DataRepository<IFootballTeamDbContext, FootballTeamEntity>(db)
@@ -19,7 +20,6 @@
     {
         public async Task<DetailFootbalTeamModel> DetailsTeamAsync(Guid teamId, CancellationToken cancellationToken)
         {
-
             return await Data.FootballTeams
                  .Where(team => team.Id == teamId)
                  .ProjectTo<DetailFootbalTeamModel>(mapper.ConfigurationProvider)
@@ -46,6 +46,16 @@
             var entry = await Data.FootballTeams.AddAsync(entity);
             await Data.SaveChangesAsync(CancellationToken.None);
             return entry.Entity.Id;
+        }
+
+        public async Task<FootballTeamEntity> FindTeamByIdAsync(Guid teamId, CancellationToken cancellationToken)
+          => await Data.FootballTeams.FirstOrDefaultAsync(team => team.Id == teamId, cancellationToken)
+            ?? throw new InvalidFootballTeamException("Team does not exist");
+
+        public async Task UpdataTeamAsync(FootballTeamEntity entity)
+        {
+            Data.FootballTeams.Update(entity);
+            await Data.SaveChangesAsync(CancellationToken.None);
         }
     }
 }
