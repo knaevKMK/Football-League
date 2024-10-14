@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using Application.BoundedContexts.FootballMatches.Commands;
+    using Application.BoundedContexts.FootballTeams.Commands.Create;
 
     public static class ApiConfiguration
     {
@@ -29,7 +30,9 @@
                  .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
                 .AddValidatorsFromAssemblyContaining<Result>()
-                .AddValidatorsFromAssemblyContaining<CreateFootballMatchCommandValidator>();
+                .AddValidatorsFromAssemblyContaining<CreateFootballMatchCommandValidator>()
+                .AddValidatorsFromAssemblyContaining<CreateFootballTeamCommandValidator>()
+                ;
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

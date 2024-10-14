@@ -1,4 +1,4 @@
-﻿namespace Application.BoundedContexts.FootballTeams.Commands
+﻿namespace Application.BoundedContexts.FootballTeams.Commands.Create
 {
     using Application.Common;
     using Application.Common.Contracts;
@@ -9,7 +9,7 @@
 
     public class CreateFootballTeamCommand : IRequest<Result<Guid>>
     {
-        public string Name { get; set; } = default!;
+        public required string Name { get; set; } = default!;
         public string? Description { get; set; }
 
 

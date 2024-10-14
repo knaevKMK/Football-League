@@ -1,6 +1,7 @@
 ﻿namespace API.Features.FottballTeams
 {
     using Application.BoundedContexts.FootballTeams.Commands;
+    using Application.BoundedContexts.FootballTeams.Commands.Create;
     using Application.BoundedContexts.FootballTeams.Queries;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
