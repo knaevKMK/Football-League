@@ -1,8 +1,8 @@
 ﻿namespace Infrastructure.Common.Persistence
 {
-    using Application.Common.Contracts;
 
     #region Usings
+    using Application.Common.Contracts;
     using Domain.BoundedContexts.FootballMatch.Entities;
     using Domain.BoundedContexts.FootballTeam.Entities;
     using Domain.BoundedContexts.FootbalTeam.Entities;

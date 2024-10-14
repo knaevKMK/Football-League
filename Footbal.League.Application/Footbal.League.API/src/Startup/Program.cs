@@ -3,6 +3,7 @@ using static Application.ApplicationConfiguration;
 using static Infrastructure.InfrastructureConfiguration;
 using static Domain.DomainConfiguration;
 using API.Middleware;
+using Infrastructure.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +17,8 @@ builder.Services
 var app = builder.Build();
 
 app.UseValidationExceptionHandler();
- 
- //todo hide swagger into Release
+
+//todo hide swagger into Release
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League V1"));
 

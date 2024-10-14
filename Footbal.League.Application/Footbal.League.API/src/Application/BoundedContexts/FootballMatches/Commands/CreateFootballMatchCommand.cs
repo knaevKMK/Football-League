@@ -42,7 +42,9 @@
 
                     var matchId = await matchesRepository.CreateAsync(entity);
 
-                   await footballTeamsDomainRepository.UpdateRankAsync(matchId, request.HomeTeamId, request.HomeTeamGoals, request.GuestTeamId, request.GuestTeamGoals);
+
+                    //ToDo impl Rank(Transact-SQL)
+                    await footballTeamsDomainRepository.UpdateRankAsync(matchId, request.HomeTeamId, request.HomeTeamGoals, request.GuestTeamId, request.GuestTeamGoals);
 
                     return matchId;
                 }
