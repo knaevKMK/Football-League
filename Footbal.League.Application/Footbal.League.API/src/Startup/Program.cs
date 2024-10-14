@@ -18,6 +18,11 @@ var app = builder.Build();
 
 app.UseValidationExceptionHandler();
 
+// throw
+//var Initializer=app.Services.GetRequiredService<IInitializer>();
+//Initializer.Initialize();
+//
+
 //todo hide swagger into Release
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League V1"));
