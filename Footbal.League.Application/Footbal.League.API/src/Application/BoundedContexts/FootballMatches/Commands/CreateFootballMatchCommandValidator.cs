@@ -8,9 +8,13 @@
     {
         public CreateFootballMatchCommandValidator()
         {
+            RuleFor(cmd => cmd)
+               .Must(cmd => cmd.HomeTeamId != cmd.GuestTeamId)
+               .WithMessage("Home team ID and guest team ID must be different.");
+
             RuleFor(cmd => cmd.HomeTeamId)
                .NotEqual(Guid.Empty)
-               .WithMessage("Home team ID must be a valid GUID.");
+               .WithMessage("Home team ID must be a valid GUID.") ;
 
             RuleFor(cmd => (int)cmd.HomeTeamGoals)
                .InclusiveBetween(0, 255)
