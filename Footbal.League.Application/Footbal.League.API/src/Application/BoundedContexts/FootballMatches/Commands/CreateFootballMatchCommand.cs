@@ -15,9 +15,9 @@
     {
         #region props
         public Guid HomeTeamId { get; set; }
-        public byte HomeTeamGoals { get; set; }
+        public int HomeTeamGoals { get; set; }
         public Guid GuestTeamId { get; set; }
-        public byte GuestTeamGoals { get; set; }
+        public int GuestTeamGoals { get; set; }
         #endregion
 
         public class CreateFootballMatchHandler(
@@ -35,16 +35,16 @@
                     var entity = matchFactory
                                            .WithCreatedFrom(currentUser.UserIdAsGuid())
                                            .WithHomeTeam(request.HomeTeamId)
-                                           .WithHomeTeamGoals(request.HomeTeamGoals)
+                                           .WithHomeTeamGoals((byte)request.HomeTeamGoals)
                                            .WithGuestTeam(request.GuestTeamId)
-                                           .WithGuestTeamGoals(request.GuestTeamGoals)
+                                           .WithGuestTeamGoals((byte)request.GuestTeamGoals)
                                            .Build();
 
                     var matchId = await matchesRepository.CreateAsync(entity);
 
 
                     //ToDo impl Rank(Transact-SQL)
-                    await footballTeamsDomainRepository.UpdateRankAsync(matchId, request.HomeTeamId, request.HomeTeamGoals, request.GuestTeamId, request.GuestTeamGoals);
+                    await footballTeamsDomainRepository.UpdateRankAsync(matchId, request.HomeTeamId, (byte)request.HomeTeamGoals, request.GuestTeamId, (byte)request.GuestTeamGoals);
 
                     return matchId;
                 }

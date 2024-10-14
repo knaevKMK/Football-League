@@ -6,7 +6,8 @@
     using FluentValidation.AspNetCore;
     using API.Services;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.DependencyInjection; 
+    using Microsoft.Extensions.DependencyInjection;
+    using Application.BoundedContexts.FootballMatches.Commands;
 
     public static class ApiConfiguration
     {
@@ -22,13 +23,13 @@
                     Version = "v1"
                 }); 
             });
-
-
+ 
             services
                 .AddScoped<ICurrentUser, CurrentUserService>()?
-                .AddFluentValidationAutoValidation()
+                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
-                .AddValidatorsFromAssemblyContaining<Result>();
+                .AddValidatorsFromAssemblyContaining<Result>()
+                .AddValidatorsFromAssemblyContaining<CreateFootballMatchCommandValidator>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
